@@ -33,8 +33,8 @@ const router = createRouter({
       props: true
     },
     {
-      // Phase-3-Playground fuer die gemeinsamen Komponenten, weiterhin
-      // nuetzlich fuer manuelle Komponenten-Tests ausserhalb der echten Views.
+      // Phase-3-Playground für die gemeinsamen Komponenten, weiterhin
+      // nützlich für manuelle Komponenten-Tests ausserhalb der echten Views.
       path: "/playground",
       name: "playground",
       component: () => import("@/views/ComponentPlaygroundView.vue")

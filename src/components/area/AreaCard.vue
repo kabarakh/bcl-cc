@@ -21,7 +21,7 @@ const to = computed(() => ({ name: "area", params: { areaId: props.area.id } }))
   <Card :to="to">
     <h3 class="font-semibold text-gray-900">{{ area.name }}</h3>
     <p class="mt-2 text-xs text-gray-400">
-      {{ wallCount }} {{ wallCount === 1 ? "Wand" : "Waende" }}
+      {{ wallCount }} {{ wallCount === 1 ? "Wand" : "Wände" }}
     </p>
   </Card>
 </template>

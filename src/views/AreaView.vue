@@ -75,19 +75,19 @@ async function onDeleteConfirmed() {
     <PageHeader :title="area.name">
       <template #actions>
         <Button variant="secondary" @click="isEditModalOpen = true">Bearbeiten</Button>
-        <Button variant="danger" @click="isDeleteConfirmOpen = true">Bereich loeschen</Button>
+        <Button variant="danger" @click="isDeleteConfirmOpen = true">Bereich löschen</Button>
       </template>
     </PageHeader>
 
     <div class="mb-4 flex items-center justify-between">
-      <h2 class="text-lg font-semibold text-gray-900">Waende</h2>
+      <h2 class="text-lg font-semibold text-gray-900">Wände</h2>
       <Button variant="primary" @click="isCreateWallModalOpen = true">Wand anlegen</Button>
     </div>
 
     <ListLayout
       :items="walls"
       :loading="wallStore.loading"
-      empty-message="Noch keine Waende in diesem Bereich."
+      empty-message="Noch keine Wände in diesem Bereich."
     >
       <template #item="{ item }">
         <WallCard :wall="item" />
@@ -105,9 +105,9 @@ async function onDeleteConfirmed() {
 
   <ConfirmDialog
     v-model="isDeleteConfirmOpen"
-    title="Bereich loeschen"
-    message="Damit werden auch alle Waende, Routen und Versuche dieses Bereichs unwiderruflich geloescht."
-    confirm-label="Endgueltig loeschen"
+    title="Bereich löschen"
+    message="Damit werden auch alle Wände, Routen und Versuche dieses Bereichs unwiderruflich gelöscht."
+    confirm-label="Endgültig löschen"
     danger
     @confirm="onDeleteConfirmed"
   />

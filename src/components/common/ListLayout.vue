@@ -9,7 +9,7 @@ withDefaults(
   }>(),
   {
     loading: false,
-    emptyMessage: "Keine Eintraege vorhanden."
+    emptyMessage: "Keine Einträge vorhanden."
   }
 );
 </script>

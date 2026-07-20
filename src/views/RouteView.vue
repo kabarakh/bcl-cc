@@ -98,7 +98,7 @@ async function onDeleteConfirmed() {
         <Button variant="secondary" @click="onArchiveToggle">
           {{ route.archived ? "Wieder aktivieren" : "Archivieren" }}
         </Button>
-        <Button variant="danger" @click="isDeleteConfirmOpen = true">Route loeschen</Button>
+        <Button variant="danger" @click="isDeleteConfirmOpen = true">Route löschen</Button>
       </template>
     </PageHeader>
 
@@ -132,7 +132,7 @@ async function onDeleteConfirmed() {
     </div>
 
     <p v-if="attempts.length === 0" class="text-sm text-gray-500">
-      Noch keine Versuche fuer diese Route erfasst.
+      Noch keine Versuche für diese Route erfasst.
     </p>
     <AttemptList v-else :attempts="attempts" />
   </main>
@@ -147,9 +147,9 @@ async function onDeleteConfirmed() {
 
   <ConfirmDialog
     v-model="isDeleteConfirmOpen"
-    title="Route loeschen"
-    message="Damit werden auch alle protokollierten Versuche dieser Route unwiderruflich geloescht."
-    confirm-label="Endgueltig loeschen"
+    title="Route löschen"
+    message="Damit werden auch alle protokollierten Versuche dieser Route unwiderruflich gelöscht."
+    confirm-label="Endgültig löschen"
     danger
     @confirm="onDeleteConfirmed"
   />

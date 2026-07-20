@@ -59,7 +59,7 @@ async function onDeleteConfirmed() {
     <PageHeader :title="hall.name" :subtitle="hall.address">
       <template #actions>
         <Button variant="secondary" @click="isEditModalOpen = true">Bearbeiten</Button>
-        <Button variant="danger" @click="isDeleteConfirmOpen = true">Halle loeschen</Button>
+        <Button variant="danger" @click="isDeleteConfirmOpen = true">Halle löschen</Button>
       </template>
     </PageHeader>
 
@@ -89,9 +89,9 @@ async function onDeleteConfirmed() {
 
   <ConfirmDialog
     v-model="isDeleteConfirmOpen"
-    title="Halle loeschen"
-    message="Damit werden auch alle Bereiche, Waende, Routen und Versuche dieser Halle unwiderruflich geloescht."
-    confirm-label="Endgueltig loeschen"
+    title="Halle löschen"
+    message="Damit werden auch alle Bereiche, Wände, Routen und Versuche dieser Halle unwiderruflich gelöscht."
+    confirm-label="Endgültig löschen"
     danger
     @confirm="onDeleteConfirmed"
   />

@@ -13,8 +13,8 @@ withDefaults(
     danger?: boolean;
   }>(),
   {
-    title: "Bitte bestaetigen",
-    confirmLabel: "Bestaetigen",
+    title: "Bitte bestätigen",
+    confirmLabel: "Bestätigen",
     cancelLabel: "Abbrechen",
     danger: false
   }

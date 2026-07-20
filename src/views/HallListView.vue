@@ -26,7 +26,7 @@ const halls = computed(() => hallStore.items);
   <Navbar />
 
   <main class="mx-auto max-w-5xl px-4 py-8">
-    <PageHeader title="Boulderhallen" subtitle="Alle erfassten Hallen im Ueberblick">
+    <PageHeader title="Boulderhallen" subtitle="Alle erfassten Hallen im Überblick">
       <template #actions>
         <Button variant="primary" @click="isModalOpen = true">Neue Halle</Button>
       </template>

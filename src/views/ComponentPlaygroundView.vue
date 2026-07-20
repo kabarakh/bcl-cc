@@ -51,8 +51,8 @@ const lastAction = ref("");
 
     <PageHeader title="Komponenten-Playground" subtitle="Phase 3 -- manueller Durchklick-Test">
       <template #actions>
-        <Button variant="secondary" @click="isModalOpen = true">Modal oeffnen</Button>
-        <Button variant="danger" @click="isConfirmOpen = true">Loeschen (Confirm)</Button>
+        <Button variant="secondary" @click="isModalOpen = true">Modal öffnen</Button>
+        <Button variant="danger" @click="isConfirmOpen = true">Löschen (Confirm)</Button>
       </template>
     </PageHeader>
 
@@ -91,7 +91,7 @@ const lastAction = ref("");
     </section>
 
     <section>
-      <h2 class="mb-3 text-lg font-semibold">ListLayout mit Cards (gefuellt)</h2>
+      <h2 class="mb-3 text-lg font-semibold">ListLayout mit Cards (gefüllt)</h2>
       <ListLayout :items="sampleRoutes" :loading="false">
         <template #item="{ item }">
           <Card :to="{ name: 'playground' }">
@@ -138,8 +138,8 @@ const lastAction = ref("");
 
   <ConfirmDialog
     v-model="isConfirmOpen"
-    message="Soll dieser Eintrag wirklich geloescht werden?"
+    message="Soll dieser Eintrag wirklich gelöscht werden?"
     danger
-    @confirm="lastAction = 'Loeschen bestaetigt'"
+    @confirm="lastAction = 'Löschen bestätigt'"
   />
 </template>
