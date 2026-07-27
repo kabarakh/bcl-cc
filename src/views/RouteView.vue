@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
+import { FwbBadge, FwbBreadcrumb, FwbBreadcrumbItem, FwbButton } from "flowbite-vue";
 import { useHallStore } from "@/stores/hallStore";
 import { useAreaStore } from "@/stores/areaStore";
 import { useWallStore } from "@/stores/wallStore";
@@ -8,11 +9,8 @@ import { useRouteStore } from "@/stores/routeStore";
 import { useAttemptStore } from "@/stores/attemptStore";
 import Navbar from "@/components/common/Navbar.vue";
 import PageHeader from "@/components/common/PageHeader.vue";
-import Breadcrumb from "@/components/common/Breadcrumb.vue";
-import Badge from "@/components/common/Badge.vue";
 import Modal from "@/components/common/Modal.vue";
 import ConfirmDialog from "@/components/common/ConfirmDialog.vue";
-import Button from "@/components/common/Button.vue";
 import RouteForm from "@/components/route/RouteForm.vue";
 import AttemptForm from "@/components/route/AttemptForm.vue";
 import AttemptList from "@/components/route/AttemptList.vue";
@@ -82,28 +80,44 @@ async function onDeleteConfirmed() {
   <Navbar />
 
   <main v-if="route" class="mx-auto max-w-5xl px-4 py-8">
-    <Breadcrumb
-      :items="[
-        { label: 'Hallen', to: { name: 'halls' } },
-        ...(hall ? [{ label: hall.name, to: { name: 'hall', params: { hallId: hall.id! } } }] : []),
-        ...(area ? [{ label: area.name, to: { name: 'area', params: { areaId: area.id! } } }] : []),
-        ...(wall ? [{ label: wall.name, to: { name: 'wall', params: { wallId: wall.id! } } }] : []),
-        { label: route.difficulty }
-      ]"
-    />
+    <FwbBreadcrumb class="mb-4">
+      <FwbBreadcrumbItem home>
+        <RouterLink :to="{ name: 'halls' }">Hallen</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem v-if="hall">
+        <RouterLink :to="{ name: 'hall', params: { hallId: hall.id! } }">{{ hall.name }}</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem v-if="area">
+        <RouterLink :to="{ name: 'area', params: { areaId: area.id! } }">{{ area.name }}</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem v-if="wall">
+        <RouterLink :to="{ name: 'wall', params: { wallId: wall.id! } }">{{ wall.name }}</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem>{{ route.difficulty }}</FwbBreadcrumbItem>
+    </FwbBreadcrumb>
 
     <PageHeader :title="route.difficulty" :subtitle="route.type">
       <template #actions>
-        <Button variant="secondary" @click="isEditModalOpen = true">Bearbeiten</Button>
-        <Button variant="secondary" @click="onArchiveToggle">
+        <FwbButton type="button" color="alternative" @click="isEditModalOpen = true">
+          Bearbeiten
+        </FwbButton>
+        <FwbButton type="button" color="alternative" @click="onArchiveToggle">
           {{ route.archived ? "Wieder aktivieren" : "Archivieren" }}
-        </Button>
-        <Button variant="danger" @click="isDeleteConfirmOpen = true">Route löschen</Button>
+        </FwbButton>
+        <FwbButton type="button" color="red" @click="isDeleteConfirmOpen = true">
+          Route löschen
+        </FwbButton>
       </template>
     </PageHeader>
 
     <div class="mb-6 flex flex-wrap items-center gap-4">
-      <Badge :color="route.color">{{ route.color }}</Badge>
+      <!-- Frei waehlbarer Hex-Farbwert -- kein Fall fuer FwbBadge (feste Palette). -->
+      <span
+        class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium text-white"
+        :style="{ backgroundColor: route.color }"
+      >
+        {{ route.color }}
+      </span>
       <span class="text-sm text-gray-500 dark:text-gray-400">
         Geschraubt am {{ formatDate(route.setDate) }}
       </span>
@@ -128,11 +142,13 @@ async function onDeleteConfirmed() {
     <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-2">
         <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Versuche</h2>
-        <Badge color="#16a34a">{{ Math.round(stats.successRate * 100) }}% Erfolg</Badge>
-        <Badge color="#6b7280">{{ stats.total }} gesamt</Badge>
-        <Badge v-if="stats.flash" color="#eab308">Flash</Badge>
+        <FwbBadge type="green">{{ Math.round(stats.successRate * 100) }}% Erfolg</FwbBadge>
+        <FwbBadge type="dark">{{ stats.total }} gesamt</FwbBadge>
+        <FwbBadge v-if="stats.flash" type="yellow">Flash</FwbBadge>
       </div>
-      <Button variant="primary" @click="isAttemptModalOpen = true">Versuch protokollieren</Button>
+      <FwbButton type="button" color="default" @click="isAttemptModalOpen = true">
+        Versuch protokollieren
+      </FwbButton>
     </div>
 
     <p v-if="attempts.length === 0" class="text-sm text-gray-500 dark:text-gray-400">

@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
+import { FwbBreadcrumb, FwbBreadcrumbItem, FwbButton } from "flowbite-vue";
 import { useHallStore } from "@/stores/hallStore";
 import { useAreaStore } from "@/stores/areaStore";
 import { useWallStore } from "@/stores/wallStore";
 import Navbar from "@/components/common/Navbar.vue";
 import PageHeader from "@/components/common/PageHeader.vue";
-import Breadcrumb from "@/components/common/Breadcrumb.vue";
 import ListLayout from "@/components/common/ListLayout.vue";
 import Modal from "@/components/common/Modal.vue";
 import ConfirmDialog from "@/components/common/ConfirmDialog.vue";
-import Button from "@/components/common/Button.vue";
 import HallForm from "@/components/hall/HallForm.vue";
 import AreaCard from "@/components/area/AreaCard.vue";
 import AreaForm from "@/components/area/AreaForm.vue";
@@ -54,18 +53,29 @@ async function onDeleteConfirmed() {
   <Navbar />
 
   <main v-if="hall" class="mx-auto max-w-5xl px-4 py-8">
-    <Breadcrumb :items="[{ label: 'Hallen', to: { name: 'halls' } }, { label: hall.name }]" />
+    <FwbBreadcrumb class="mb-4">
+      <FwbBreadcrumbItem home>
+        <RouterLink :to="{ name: 'halls' }">Hallen</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem>{{ hall.name }}</FwbBreadcrumbItem>
+    </FwbBreadcrumb>
 
     <PageHeader :title="hall.name" :subtitle="hall.address">
       <template #actions>
-        <Button variant="secondary" @click="isEditModalOpen = true">Bearbeiten</Button>
-        <Button variant="danger" @click="isDeleteConfirmOpen = true">Halle löschen</Button>
+        <FwbButton type="button" color="alternative" @click="isEditModalOpen = true">
+          Bearbeiten
+        </FwbButton>
+        <FwbButton type="button" color="red" @click="isDeleteConfirmOpen = true">
+          Halle löschen
+        </FwbButton>
       </template>
     </PageHeader>
 
     <div class="mb-4 flex items-center justify-between">
       <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Bereiche</h2>
-      <Button variant="primary" @click="isCreateAreaModalOpen = true">Bereich anlegen</Button>
+      <FwbButton type="button" color="default" @click="isCreateAreaModalOpen = true">
+        Bereich anlegen
+      </FwbButton>
     </div>
 
     <ListLayout

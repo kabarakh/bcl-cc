@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Modal from "./Modal.vue";
-import Button from "./Button.vue";
+import { FwbButton, FwbModal } from "flowbite-vue";
 
 const isOpen = defineModel<boolean>({ default: false });
 
@@ -35,14 +34,22 @@ function handleConfirm() {
 </script>
 
 <template>
-  <Modal :model-value="isOpen" :title="title" size="sm" @update:model-value="handleCancel">
-    <p class="text-sm text-gray-700">{{ message }}</p>
-
-    <template #footer>
-      <Button variant="secondary" @click="handleCancel">{{ cancelLabel }}</Button>
-      <Button :variant="danger ? 'danger' : 'primary'" @click="handleConfirm">
-        {{ confirmLabel }}
-      </Button>
+  <FwbModal v-if="isOpen" size="sm" @close="handleCancel">
+    <template #header>
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ title }}</h3>
     </template>
-  </Modal>
+    <template #body>
+      <p class="text-sm text-gray-700 dark:text-gray-300">{{ message }}</p>
+    </template>
+    <template #footer>
+      <div class="flex justify-end gap-2">
+        <FwbButton type="button" color="alternative" @click="handleCancel">
+          {{ cancelLabel }}
+        </FwbButton>
+        <FwbButton type="button" :color="danger ? 'red' : 'default'" @click="handleConfirm">
+          {{ confirmLabel }}
+        </FwbButton>
+      </div>
+    </template>
+  </FwbModal>
 </template>

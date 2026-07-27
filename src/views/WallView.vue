@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
+import { FwbBreadcrumb, FwbBreadcrumbItem, FwbButton, FwbCheckbox } from "flowbite-vue";
 import { useHallStore } from "@/stores/hallStore";
 import { useAreaStore } from "@/stores/areaStore";
 import { useWallStore } from "@/stores/wallStore";
 import { useRouteStore } from "@/stores/routeStore";
 import Navbar from "@/components/common/Navbar.vue";
 import PageHeader from "@/components/common/PageHeader.vue";
-import Breadcrumb from "@/components/common/Breadcrumb.vue";
 import ListLayout from "@/components/common/ListLayout.vue";
 import Modal from "@/components/common/Modal.vue";
-import Button from "@/components/common/Button.vue";
 import WallForm from "@/components/wall/WallForm.vue";
 import RouteCard from "@/components/route/RouteCard.vue";
 import RouteForm from "@/components/route/RouteForm.vue";
@@ -55,33 +54,34 @@ watchEffect(() => {
   <Navbar />
 
   <main v-if="wall" class="mx-auto max-w-5xl px-4 py-8">
-    <Breadcrumb
-      :items="[
-        { label: 'Hallen', to: { name: 'halls' } },
-        ...(hall ? [{ label: hall.name, to: { name: 'hall', params: { hallId: hall.id! } } }] : []),
-        ...(area ? [{ label: area.name, to: { name: 'area', params: { areaId: area.id! } } }] : []),
-        { label: wall.name }
-      ]"
-    />
+    <FwbBreadcrumb class="mb-4">
+      <FwbBreadcrumbItem home>
+        <RouterLink :to="{ name: 'halls' }">Hallen</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem v-if="hall">
+        <RouterLink :to="{ name: 'hall', params: { hallId: hall.id! } }">{{ hall.name }}</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem v-if="area">
+        <RouterLink :to="{ name: 'area', params: { areaId: area.id! } }">{{ area.name }}</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem>{{ wall.name }}</FwbBreadcrumbItem>
+    </FwbBreadcrumb>
 
     <PageHeader :title="wall.name">
       <template #actions>
-        <Button variant="secondary" @click="isEditModalOpen = true">Bearbeiten</Button>
+        <FwbButton type="button" color="alternative" @click="isEditModalOpen = true">
+          Bearbeiten
+        </FwbButton>
       </template>
     </PageHeader>
 
     <div class="mb-4 flex items-center justify-between">
       <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Routen</h2>
       <div class="flex items-center gap-3">
-        <label class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-          <input
-            v-model="showArchived"
-            type="checkbox"
-            class="rounded-sm border-gray-300 dark:border-gray-600 dark:bg-gray-800"
-          />
-          Archivierte anzeigen
-        </label>
-        <Button variant="primary" @click="isCreateRouteModalOpen = true">Kurs anlegen</Button>
+        <FwbCheckbox v-model="showArchived" label="Archivierte anzeigen" />
+        <FwbButton type="button" color="default" @click="isCreateRouteModalOpen = true">
+          Kurs anlegen
+        </FwbButton>
       </div>
     </div>
 

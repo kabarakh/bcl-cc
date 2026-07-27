@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Input from "@/components/common/Input.vue";
-import Button from "@/components/common/Button.vue";
+import { FwbButton, FwbInput } from "flowbite-vue";
 import { useHallStore } from "@/stores/hallStore";
 import type { Hall } from "@/types/Hall";
 
@@ -58,12 +57,26 @@ async function handleSubmit() {
 
 <template>
   <form class="space-y-4" @submit.prevent="handleSubmit">
-    <Input v-model="name" label="Name" required :error="errors.name" />
-    <Input v-model="address" label="Adresse" required :error="errors.address" />
-    <Input v-model="image" label="Bild-URL (optional)" />
+    <FwbInput
+      v-model="name"
+      label="Name"
+      required
+      :validation-status="errors.name ? 'error' : undefined"
+    >
+      <template v-if="errors.name" #validationMessage>{{ errors.name }}</template>
+    </FwbInput>
+    <FwbInput
+      v-model="address"
+      label="Adresse"
+      required
+      :validation-status="errors.address ? 'error' : undefined"
+    >
+      <template v-if="errors.address" #validationMessage>{{ errors.address }}</template>
+    </FwbInput>
+    <FwbInput v-model="image" label="Bild-URL (optional)" />
     <div class="flex justify-end gap-2">
-      <Button type="button" variant="secondary" @click="emit('close')">Abbrechen</Button>
-      <Button type="submit" variant="primary">Speichern</Button>
+      <FwbButton type="button" color="alternative" @click="emit('close')">Abbrechen</FwbButton>
+      <FwbButton type="submit" color="default">Speichern</FwbButton>
     </div>
   </form>
 </template>

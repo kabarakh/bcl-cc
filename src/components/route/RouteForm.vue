@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Input from "@/components/common/Input.vue";
-import Textarea from "@/components/common/Textarea.vue";
-import Button from "@/components/common/Button.vue";
+import { FwbButton, FwbInput, FwbTextarea } from "flowbite-vue";
 import { useRouteStore } from "@/stores/routeStore";
 import type { Route } from "@/types/Route";
 
@@ -68,17 +66,29 @@ async function handleSubmit() {
 
 <template>
   <form class="space-y-4" @submit.prevent="handleSubmit">
-    <Input v-model="difficulty" label="Schwierigkeit" placeholder="z. B. 6A+" required :error="error" />
-    <Input v-model="type" label="Typ (optional)" placeholder="z. B. crimpy, slopey" />
+    <FwbInput
+      v-model="difficulty"
+      label="Schwierigkeit"
+      placeholder="z. B. 6A+"
+      required
+      :validation-status="error ? 'error' : undefined"
+    >
+      <template v-if="error" #validationMessage>{{ error }}</template>
+    </FwbInput>
+    <FwbInput v-model="type" label="Typ (optional)" placeholder="z. B. crimpy, slopey" />
     <div>
-      <label class="mb-1 block text-sm font-medium text-gray-900">Farbe</label>
-      <input v-model="color" type="color" class="h-10 w-16 cursor-pointer rounded-sm border border-gray-300" />
+      <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Farbe</label>
+      <input
+        v-model="color"
+        type="color"
+        class="h-10 w-16 cursor-pointer rounded-lg border border-gray-300 dark:border-gray-600"
+      />
     </div>
-    <Input v-model="setDate" type="date" label="Geschraubt am" />
-    <Textarea v-model="mediaText" label="Medien (kommagetrennte Links, optional)" />
+    <FwbInput v-model="setDate" type="date" label="Geschraubt am" />
+    <FwbTextarea v-model="mediaText" label="Medien (kommagetrennte Links, optional)" />
     <div class="flex justify-end gap-2">
-      <Button type="button" variant="secondary" @click="emit('close')">Abbrechen</Button>
-      <Button type="submit" variant="primary">Speichern</Button>
+      <FwbButton type="button" color="alternative" @click="emit('close')">Abbrechen</FwbButton>
+      <FwbButton type="submit" color="default">Speichern</FwbButton>
     </div>
   </form>
 </template>

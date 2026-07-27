@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { FwbHeading } from "flowbite-vue";
+
 withDefaults(
   defineProps<{
     title: string;
@@ -13,7 +15,7 @@ withDefaults(
 <template>
   <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
     <div>
-      <h1 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">{{ title }}</h1>
+      <FwbHeading tag="h1" custom-size="text-2xl font-semibold">{{ title }}</FwbHeading>
       <p v-if="subtitle" class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ subtitle }}</p>
     </div>
     <div class="flex items-center gap-2">

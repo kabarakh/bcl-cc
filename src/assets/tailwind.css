@@ -2,6 +2,11 @@
 
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
+/* flowbite-vue liefert die Utility-Klassen direkt in seinen Vue-Komponenten
+   (z. B. FwbModal, FwbToggle). Tailwind v4 scannt node_modules standardmaessig
+   nicht -- ohne dieses @source wuerden viele dort verwendete Klassen (Toggle-
+   Zustaende, Modal-Overlay, Fokus-Ringe etc.) im Build fehlen. */
+@source "../../node_modules/flowbite-vue/dist";
 
 /*
  * Tailwind v4 nutzt fuer den `dark:` Variant standardmaessig

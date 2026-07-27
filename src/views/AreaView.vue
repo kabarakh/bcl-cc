@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
+import { FwbBreadcrumb, FwbBreadcrumbItem, FwbButton } from "flowbite-vue";
 import { useHallStore } from "@/stores/hallStore";
 import { useAreaStore } from "@/stores/areaStore";
 import { useWallStore } from "@/stores/wallStore";
 import { useRouteStore } from "@/stores/routeStore";
 import Navbar from "@/components/common/Navbar.vue";
 import PageHeader from "@/components/common/PageHeader.vue";
-import Breadcrumb from "@/components/common/Breadcrumb.vue";
 import ListLayout from "@/components/common/ListLayout.vue";
 import Modal from "@/components/common/Modal.vue";
 import ConfirmDialog from "@/components/common/ConfirmDialog.vue";
-import Button from "@/components/common/Button.vue";
 import AreaForm from "@/components/area/AreaForm.vue";
 import WallCard from "@/components/wall/WallCard.vue";
 import WallForm from "@/components/wall/WallForm.vue";
@@ -64,24 +63,32 @@ async function onDeleteConfirmed() {
   <Navbar />
 
   <main v-if="area" class="mx-auto max-w-5xl px-4 py-8">
-    <Breadcrumb
-      :items="[
-        { label: 'Hallen', to: { name: 'halls' } },
-        ...(hall ? [{ label: hall.name, to: { name: 'hall', params: { hallId: hall.id! } } }] : []),
-        { label: area.name }
-      ]"
-    />
+    <FwbBreadcrumb class="mb-4">
+      <FwbBreadcrumbItem home>
+        <RouterLink :to="{ name: 'halls' }">Hallen</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem v-if="hall">
+        <RouterLink :to="{ name: 'hall', params: { hallId: hall.id! } }">{{ hall.name }}</RouterLink>
+      </FwbBreadcrumbItem>
+      <FwbBreadcrumbItem>{{ area.name }}</FwbBreadcrumbItem>
+    </FwbBreadcrumb>
 
     <PageHeader :title="area.name">
       <template #actions>
-        <Button variant="secondary" @click="isEditModalOpen = true">Bearbeiten</Button>
-        <Button variant="danger" @click="isDeleteConfirmOpen = true">Bereich löschen</Button>
+        <FwbButton type="button" color="alternative" @click="isEditModalOpen = true">
+          Bearbeiten
+        </FwbButton>
+        <FwbButton type="button" color="red" @click="isDeleteConfirmOpen = true">
+          Bereich löschen
+        </FwbButton>
       </template>
     </PageHeader>
 
     <div class="mb-4 flex items-center justify-between">
       <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Wände</h2>
-      <Button variant="primary" @click="isCreateWallModalOpen = true">Wand anlegen</Button>
+      <FwbButton type="button" color="default" @click="isCreateWallModalOpen = true">
+        Wand anlegen
+      </FwbButton>
     </div>
 
     <ListLayout

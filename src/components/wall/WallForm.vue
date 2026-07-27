@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Input from "@/components/common/Input.vue";
-import Select from "@/components/common/Select.vue";
-import Button from "@/components/common/Button.vue";
+import { FwbButton, FwbInput, FwbSelect } from "flowbite-vue";
 import { useWallStore } from "@/stores/wallStore";
 import type { Wall, WallType } from "@/types/Wall";
 
@@ -18,8 +16,8 @@ const emit = defineEmits<{
 const wallStore = useWallStore();
 
 const wallTypeOptions = [
-  { label: "Boulderwand", value: "boulder" },
-  { label: "Quergang", value: "traverse" }
+  { name: "Boulderwand", value: "boulder" },
+  { name: "Quergang", value: "traverse" }
 ];
 
 const name = ref(props.modelValue?.name ?? "");
@@ -59,12 +57,19 @@ async function handleSubmit() {
 
 <template>
   <form class="space-y-4" @submit.prevent="handleSubmit">
-    <Input v-model="name" label="Name" required :error="error" />
-    <Select v-model="type" label="Typ" :options="wallTypeOptions" />
-    <Input v-model="lastSetDate" type="date" label="Zuletzt geschraubt" />
+    <FwbInput
+      v-model="name"
+      label="Name"
+      required
+      :validation-status="error ? 'error' : undefined"
+    >
+      <template v-if="error" #validationMessage>{{ error }}</template>
+    </FwbInput>
+    <FwbSelect v-model="type" label="Typ" :options="wallTypeOptions" />
+    <FwbInput v-model="lastSetDate" type="date" label="Zuletzt geschraubt" />
     <div class="flex justify-end gap-2">
-      <Button type="button" variant="secondary" @click="emit('close')">Abbrechen</Button>
-      <Button type="submit" variant="primary">Speichern</Button>
+      <FwbButton type="button" color="alternative" @click="emit('close')">Abbrechen</FwbButton>
+      <FwbButton type="submit" color="default">Speichern</FwbButton>
     </div>
   </form>
 </template>

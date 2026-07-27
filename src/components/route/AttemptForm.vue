@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import Input from "@/components/common/Input.vue";
-import Textarea from "@/components/common/Textarea.vue";
-import Select from "@/components/common/Select.vue";
-import Button from "@/components/common/Button.vue";
+import { FwbButton, FwbInput, FwbSelect, FwbTextarea } from "flowbite-vue";
 import { useAttemptStore } from "@/stores/attemptStore";
 
 const props = defineProps<{
@@ -17,8 +14,8 @@ const emit = defineEmits<{
 const attemptStore = useAttemptStore();
 
 const resultOptions = [
-  { label: "Erfolgreich", value: "true" },
-  { label: "Kein Erfolg", value: "false" }
+  { name: "Erfolgreich", value: "true" },
+  { name: "Kein Erfolg", value: "false" }
 ];
 
 const date = ref(new Date().toISOString().slice(0, 10));
@@ -40,13 +37,13 @@ async function handleSubmit() {
 
 <template>
   <form class="space-y-4" @submit.prevent="handleSubmit">
-    <Input v-model="date" type="date" label="Datum" required />
-    <Select v-model="success" label="Ergebnis" :options="resultOptions" />
-    <Textarea v-model="notes" label="Notizen (optional)" />
-    <Input v-model="media" label="Medien-Link (optional)" />
+    <FwbInput v-model="date" type="date" label="Datum" required />
+    <FwbSelect v-model="success" label="Ergebnis" :options="resultOptions" />
+    <FwbTextarea v-model="notes" label="Notizen (optional)" />
+    <FwbInput v-model="media" label="Medien-Link (optional)" />
     <div class="flex justify-end gap-2">
-      <Button type="button" variant="secondary" @click="emit('close')">Abbrechen</Button>
-      <Button type="submit" variant="primary">Speichern</Button>
+      <FwbButton type="button" color="alternative" @click="emit('close')">Abbrechen</FwbButton>
+      <FwbButton type="submit" color="default">Speichern</FwbButton>
     </div>
   </form>
 </template>

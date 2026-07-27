@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Input from "@/components/common/Input.vue";
-import Button from "@/components/common/Button.vue";
+import { FwbButton, FwbInput } from "flowbite-vue";
 import { useAreaStore } from "@/stores/areaStore";
 import type { HallArea } from "@/types/HallArea";
 
@@ -44,10 +43,17 @@ async function handleSubmit() {
 
 <template>
   <form class="space-y-4" @submit.prevent="handleSubmit">
-    <Input v-model="name" label="Name" required :error="error" />
+    <FwbInput
+      v-model="name"
+      label="Name"
+      required
+      :validation-status="error ? 'error' : undefined"
+    >
+      <template v-if="error" #validationMessage>{{ error }}</template>
+    </FwbInput>
     <div class="flex justify-end gap-2">
-      <Button type="button" variant="secondary" @click="emit('close')">Abbrechen</Button>
-      <Button type="submit" variant="primary">Speichern</Button>
+      <FwbButton type="button" color="alternative" @click="emit('close')">Abbrechen</FwbButton>
+      <FwbButton type="submit" color="default">Speichern</FwbButton>
     </div>
   </form>
 </template>
