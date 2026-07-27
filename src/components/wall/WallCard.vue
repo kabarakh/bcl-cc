@@ -27,15 +27,15 @@ const to = computed(() => ({ name: "wall", params: { wallId: props.wall.id } }))
 <template>
   <Card :to="to">
     <div class="flex items-center justify-between">
-      <h3 class="font-semibold text-gray-900">{{ wall.name }}</h3>
+      <h3 class="font-semibold text-gray-900 dark:text-gray-100">{{ wall.name }}</h3>
       <Badge :color="wall.type === 'boulder' ? '#3b82f6' : '#8b5cf6'">
         {{ typeLabel[wall.type] }}
       </Badge>
     </div>
-    <p class="mt-2 text-xs text-gray-400">
+    <p class="mt-2 text-xs text-gray-400 dark:text-gray-500">
       Zuletzt geschraubt {{ formatRelative(wall.lastSetDate) }}
     </p>
-    <p class="mt-1 text-xs text-gray-400">
+    <p class="mt-1 text-xs text-gray-400 dark:text-gray-500">
       {{ routeCount }} {{ routeCount === 1 ? "Route" : "Routen" }}
     </p>
   </Card>

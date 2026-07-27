@@ -2,3 +2,19 @@
 
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
+
+/*
+ * Tailwind v4 nutzt fuer den `dark:` Variant standardmaessig
+ * `@media (prefers-color-scheme: dark)`. Damit sich der Modus per Switch
+ * manuell umschalten laesst (mit Systemeinstellung als Standardwert),
+ * wird hier auf eine class-basierte Strategie umgestellt: `dark:`-Utilities
+ * greifen, sobald das <html>-Element (oder ein Vorfahre) die Klasse `dark`
+ * traegt. Gesteuert wird das vom themeStore (src/stores/themeStore.ts).
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Sorgt dafuer, dass native Form-Controls, Scrollbars etc. im Dark Mode
+   ebenfalls dunkel eingefaerbt werden. */
+html.dark {
+  color-scheme: dark;
+}

@@ -13,17 +13,17 @@ defineProps<{
 
 <template>
   <nav class="mb-4" aria-label="Breadcrumb">
-    <ol class="flex flex-wrap items-center gap-1.5 text-sm text-gray-500">
+    <ol class="flex flex-wrap items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
       <li v-for="(item, index) in items" :key="index" class="flex items-center gap-1.5">
         <span v-if="index > 0" aria-hidden="true">/</span>
         <RouterLink
           v-if="item.to"
           :to="item.to"
-          class="hover:text-blue-700 hover:underline"
+          class="hover:text-blue-700 hover:underline dark:hover:text-blue-400"
         >
           {{ item.label }}
         </RouterLink>
-        <span v-else class="font-medium text-gray-900">{{ item.label }}</span>
+        <span v-else class="font-medium text-gray-900 dark:text-gray-100">{{ item.label }}</span>
       </li>
     </ol>
   </nav>

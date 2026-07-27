@@ -14,9 +14,10 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const variantClasses: Record<NonNullable<Props["variant"]>, string> = {
-  primary: "bg-blue-700 hover:bg-blue-800 text-white focus:ring-blue-300",
-  secondary: "bg-white hover:bg-gray-100 text-gray-900 border border-gray-300 focus:ring-gray-200",
-  danger: "bg-red-700 hover:bg-red-800 text-white focus:ring-red-300"
+  primary: "bg-blue-700 hover:bg-blue-800 text-white focus:ring-blue-300 dark:focus:ring-blue-800",
+  secondary:
+    "bg-white hover:bg-gray-100 text-gray-900 border border-gray-300 focus:ring-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:focus:ring-gray-700",
+  danger: "bg-red-700 hover:bg-red-800 text-white focus:ring-red-300 dark:focus:ring-red-800"
 };
 </script>
 

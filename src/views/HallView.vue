@@ -64,7 +64,7 @@ async function onDeleteConfirmed() {
     </PageHeader>
 
     <div class="mb-4 flex items-center justify-between">
-      <h2 class="text-lg font-semibold text-gray-900">Bereiche</h2>
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Bereiche</h2>
       <Button variant="primary" @click="isCreateAreaModalOpen = true">Bereich anlegen</Button>
     </div>
 

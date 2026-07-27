@@ -43,7 +43,7 @@ const lastAction = ref("");
 
 <template>
   <Navbar>
-    <span class="text-sm text-gray-500">Komponenten-Playground</span>
+    <span class="text-sm text-gray-500 dark:text-gray-400">Komponenten-Playground</span>
   </Navbar>
 
   <main class="mx-auto max-w-5xl space-y-10 px-4 py-8">
@@ -56,7 +56,10 @@ const lastAction = ref("");
       </template>
     </PageHeader>
 
-    <p v-if="lastAction" class="rounded-lg bg-green-50 px-4 py-2 text-sm text-green-700">
+    <p
+      v-if="lastAction"
+      class="rounded-lg bg-green-50 px-4 py-2 text-sm text-green-700 dark:bg-green-950 dark:text-green-400"
+    >
       {{ lastAction }}
     </p>
 
@@ -129,7 +132,7 @@ const lastAction = ref("");
   </main>
 
   <Modal v-model="isModalOpen" title="Beispiel-Modal">
-    <p class="text-sm text-gray-700">Dies ist ein Beispieltext im Modal-Body.</p>
+    <p class="text-sm text-gray-700 dark:text-gray-300">Dies ist ein Beispieltext im Modal-Body.</p>
     <template #footer>
       <Button variant="secondary" @click="isModalOpen = false">Schliessen</Button>
       <Button variant="primary" @click="isModalOpen = false">Speichern</Button>

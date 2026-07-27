@@ -42,15 +42,17 @@ watch(isOpen, (open) => {
   <Teleport to="body">
     <div
       v-if="isOpen"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 p-4"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 p-4 dark:bg-black/70"
       @mousedown.self="close"
     >
-      <div class="w-full rounded-lg bg-white shadow-lg" :class="sizeClasses[size]">
-        <div class="flex items-center justify-between border-b border-gray-200 px-5 py-3">
-          <h2 class="text-lg font-semibold text-gray-900">{{ title }}</h2>
+      <div class="w-full rounded-lg bg-white shadow-lg dark:bg-gray-900" :class="sizeClasses[size]">
+        <div
+          class="flex items-center justify-between border-b border-gray-200 px-5 py-3 dark:border-gray-800"
+        >
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ title }}</h2>
           <button
             type="button"
-            class="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700"
+            class="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
             aria-label="Schliessen"
             @click="close"
           >
@@ -60,7 +62,10 @@ watch(isOpen, (open) => {
         <div class="px-5 py-4">
           <slot />
         </div>
-        <div v-if="$slots.footer" class="flex justify-end gap-2 border-t border-gray-200 px-5 py-3">
+        <div
+          v-if="$slots.footer"
+          class="flex justify-end gap-2 border-t border-gray-200 px-5 py-3 dark:border-gray-800"
+        >
           <slot name="footer" />
         </div>
       </div>

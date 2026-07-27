@@ -14,10 +14,12 @@ const to = computed(() => ({ name: "route", params: { routeId: props.route.id } 
 <template>
   <Card :to="to" :class="route.archived ? 'opacity-60' : ''">
     <div class="flex items-center justify-between">
-      <span class="font-semibold text-gray-900">{{ route.difficulty }}</span>
+      <span class="font-semibold text-gray-900 dark:text-gray-100">{{ route.difficulty }}</span>
       <Badge :color="route.color">{{ route.color }}</Badge>
     </div>
-    <p v-if="route.type" class="mt-1 text-xs text-gray-500">{{ route.type }}</p>
-    <p v-if="route.archived" class="mt-2 text-xs font-medium text-amber-600">Archiviert</p>
+    <p v-if="route.type" class="mt-1 text-xs text-gray-500 dark:text-gray-400">{{ route.type }}</p>
+    <p v-if="route.archived" class="mt-2 text-xs font-medium text-amber-600 dark:text-amber-500">
+      Archiviert
+    </p>
   </Card>
 </template>

@@ -104,8 +104,12 @@ async function onDeleteConfirmed() {
 
     <div class="mb-6 flex flex-wrap items-center gap-4">
       <Badge :color="route.color">{{ route.color }}</Badge>
-      <span class="text-sm text-gray-500">Geschraubt am {{ formatDate(route.setDate) }}</span>
-      <span v-if="route.archived" class="text-sm font-medium text-amber-600">Archiviert</span>
+      <span class="text-sm text-gray-500 dark:text-gray-400">
+        Geschraubt am {{ formatDate(route.setDate) }}
+      </span>
+      <span v-if="route.archived" class="text-sm font-medium text-amber-600 dark:text-amber-500">
+        Archiviert
+      </span>
     </div>
 
     <div v-if="route.media.length > 0" class="mb-6 flex flex-wrap gap-2">
@@ -115,7 +119,7 @@ async function onDeleteConfirmed() {
         :href="link"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-sm text-blue-700 hover:underline"
+        class="text-sm text-blue-700 hover:underline dark:text-blue-400"
       >
         Medium {{ index + 1 }}
       </a>
@@ -123,7 +127,7 @@ async function onDeleteConfirmed() {
 
     <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-2">
-        <h2 class="text-lg font-semibold text-gray-900">Versuche</h2>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Versuche</h2>
         <Badge color="#16a34a">{{ Math.round(stats.successRate * 100) }}% Erfolg</Badge>
         <Badge color="#6b7280">{{ stats.total }} gesamt</Badge>
         <Badge v-if="stats.flash" color="#eab308">Flash</Badge>
@@ -131,7 +135,7 @@ async function onDeleteConfirmed() {
       <Button variant="primary" @click="isAttemptModalOpen = true">Versuch protokollieren</Button>
     </div>
 
-    <p v-if="attempts.length === 0" class="text-sm text-gray-500">
+    <p v-if="attempts.length === 0" class="text-sm text-gray-500 dark:text-gray-400">
       Noch keine Versuche für diese Route erfasst.
     </p>
     <AttemptList v-else :attempts="attempts" />

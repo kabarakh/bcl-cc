@@ -71,10 +71,14 @@ watchEffect(() => {
     </PageHeader>
 
     <div class="mb-4 flex items-center justify-between">
-      <h2 class="text-lg font-semibold text-gray-900">Routen</h2>
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Routen</h2>
       <div class="flex items-center gap-3">
-        <label class="flex items-center gap-2 text-sm text-gray-600">
-          <input v-model="showArchived" type="checkbox" class="rounded-sm border-gray-300" />
+        <label class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+          <input
+            v-model="showArchived"
+            type="checkbox"
+            class="rounded-sm border-gray-300 dark:border-gray-600 dark:bg-gray-800"
+          />
           Archivierte anzeigen
         </label>
         <Button variant="primary" @click="isCreateRouteModalOpen = true">Kurs anlegen</Button>

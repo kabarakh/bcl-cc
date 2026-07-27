@@ -18,7 +18,7 @@ withDefaults(
   <div>
     <div v-if="loading" class="flex justify-center py-10">
       <span
-        class="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-blue-700"
+        class="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-blue-700 dark:border-gray-700 dark:border-t-blue-500"
         aria-hidden="true"
       />
     </div>
